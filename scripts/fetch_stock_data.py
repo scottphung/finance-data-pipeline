@@ -1,23 +1,15 @@
 import yfinance as yf
 import pandas as pd
 
-# Step 1: define stocks
-tickers = ["AAPL", "TSLA", "MSFT"]
+tickers = ["AAPL", "MSFT", "TSLA"]
 
-# Step 2: empty list to store data
-all_data = []
+data = []
 
-# Step 3: loop through stocks
-for ticker in tickers:
-    data = yf.download(ticker, start="2024-01-01", end="2025-01-01")
-    data.reset_index(inplace=True)
-    data["Ticker"] = ticker
-    all_data.append(data)
+for t in tickers:
+    df = yf.download(t, period="1y")
+    df["ticker"] = t
+    df = df.reset_index()
+    data.append(df)
 
-# Step 4: combine all stocks
-final_df = pd.concat(all_data)
-
-# Step 5: save to file
-final_df.to_csv("data/stock_data.csv", index=False)
-
-print("Data saved successfully!")
+final = pd.concat(data)
+final.to_csv("data/stocks.csv", index=False)

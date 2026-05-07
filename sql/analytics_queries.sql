@@ -1,14 +1,7 @@
--- Average closing price per stock
-SELECT ticker, AVG(close) AS avg_close
+SELECT ticker, AVG(close)
 FROM stock_prices
 GROUP BY ticker;
 
--- Highest price per stock
-SELECT ticker, MAX(high) AS max_price
-FROM stock_prices
-GROUP BY ticker;
-
--- Total volume traded
-SELECT ticker, SUM(volume) AS total_volume
+SELECT ticker, MAX(high)
 FROM stock_prices
 GROUP BY ticker;
